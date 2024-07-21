@@ -98,12 +98,50 @@ const logout = () => {
                                 <NavLink
                                     class="text-white"
                                     :href="route('articles.index')"
-                                    :active="route().current('dashboard')"
+                                    :active="route().current('articles*')"
                                 >
                                     <ClipboardDocumentListOutline
                                         :class="toggleNavigation ? 'size-5 font-extrabold' : 'size-6 me-2' "
                                     />
                                     <span v-show="!toggleNavigation">All Media</span>
+                                </NavLink>
+                            </li>
+                            <li
+                                v-if="$page.props.auth.user.type == $page.props.user_types.EDITOR"
+                                :class="{
+                                    'bg-indigo-700 dark:bg-gray-900' : route().current('users*'),
+                                    'justify-center !py-1' : toggleNavigation
+                                }"
+                                class="hover:bg-indigo-700 py-2 px-2 rounded-md dark:hover:bg-gray-900 flex items-center dark:text-white text-white"
+                            >
+                                <NavLink
+                                    class="text-white"
+                                    :href="route('users.index')"
+                                    :active="route().current('users*')"
+                                >
+                                    <UsersOutline
+                                        :class="toggleNavigation ? 'size-5 font-extrabold' : 'size-6 me-2' "
+                                    />
+                                    <span v-show="!toggleNavigation">Users</span>
+                                </NavLink>
+                            </li>
+                            <li
+                                v-if="$page.props.auth.user.type == $page.props.user_types.EDITOR"
+                                :class="{
+                                    'bg-indigo-700 dark:bg-gray-900' : route().current('companies*'),
+                                    'justify-center !py-1' : toggleNavigation
+                                }"
+                                class="hover:bg-indigo-700 py-2 px-2 rounded-md dark:hover:bg-gray-900 flex items-center dark:text-white text-white"
+                            >
+                                <NavLink
+                                    class="text-white"
+                                    :href="route('companies.index')"
+                                    :active="route().current('companies*')"
+                                >
+                                    <ClipboardDocumentListOutline
+                                        :class="toggleNavigation ? 'size-5 font-extrabold' : 'size-6 me-2' "
+                                    />
+                                    <span v-show="!toggleNavigation">Companies</span>
                                 </NavLink>
                             </li>
                         </ul>
