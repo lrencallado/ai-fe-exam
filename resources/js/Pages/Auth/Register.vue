@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import AuthenticationCard from '@/Components/AuthenticationCard.vue';
 import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
 import Checkbox from '@/Components/Checkbox.vue';
@@ -9,12 +9,16 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 
 const form = useForm({
-    name: '',
+    first_name: '',
+    last_name: '',
     email: '',
+    type: '',
     password: '',
     password_confirmation: '',
     terms: false,
 });
+
+const types = usePage().props.user_types;
 
 const submit = () => {
     form.post(route('register'), {
@@ -33,17 +37,31 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="first_name" value="First Name" />
                 <TextInput
-                    id="name"
-                    v-model="form.name"
+                    id="first_name"
+                    v-model="form.first_name"
                     type="text"
                     class="mt-1 block w-full"
                     required
                     autofocus
-                    autocomplete="name"
+                    autocomplete="first_name"
                 />
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError class="mt-2" :message="form.errors.first_name" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="last_name" value="Last Name" />
+                <TextInput
+                    id="last_name"
+                    v-model="form.last_name"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                    autocomplete="last_name"
+                />
+                <InputError class="mt-2" :message="form.errors.last_name" />
             </div>
 
             <div class="mt-4">
@@ -57,6 +75,19 @@ const submit = () => {
                     autocomplete="username"
                 />
                 <InputError class="mt-2" :message="form.errors.email" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="type" value="Type"/>
+                <select
+                    id="type"
+                    v-model="form.type"
+                    class="border-gray-300 w-full mt-1 block dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
+                    required
+                >
+                    <option v-for="(value, key) in types" :value="value">{{ value }}</option>
+                </select>
+                <InputError class="mt-2" :message="form.errors.type" />
             </div>
 
             <div class="mt-4">

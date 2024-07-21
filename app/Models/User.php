@@ -3,7 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Enums\Type;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -24,8 +27,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
+        'type',
         'password',
     ];
 
@@ -48,6 +53,7 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+        'name',
     ];
 
     /**
@@ -61,5 +67,30 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    protected function getNameAttribute(): string
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function writerArticles(): HasMany
+    {
+        return $this->hasMany(Article::class, 'writer');
+    }
+
+    public function editorArticles(): HasMany
+    {
+        return $this->hasMany(Article::class, 'editor');
+    }
+
+    public function writers()
+    {
+        return $this->where('type', Type::WRITER)->get();
+    }
+
+    public function editors()
+    {
+        return $this->where('type', Type::EDITOR)->get();
     }
 }

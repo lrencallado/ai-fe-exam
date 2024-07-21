@@ -36,7 +36,8 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         return array_merge(parent::share($request), [
-            //
+            'user_types' => \App\Enums\Type::toArray(),
+            'status' => \App\Enums\Status::toArray(),
         ]);
     }
 }
