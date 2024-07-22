@@ -83,7 +83,7 @@ defineProps({
                                         </span>
                                     </td>
                                 </tr>
-                                <tr v-if="Object.keys(articles).length == 0">
+                                <tr v-if="articles.data.length == 0">
                                     <td colspan="3" class="px-6 py-4">No data.</td>
                                 </tr>
                             </tbody>

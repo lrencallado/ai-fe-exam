@@ -133,6 +133,12 @@ const createArticle = () => {
                                 </p>
                             </div>
                         </div>
+                        <div
+                        v-if="articles.length == 0"
+                            class="bg-gray-200 dark:bg-gray-800 bg-opacity-25 text-center text-gray-900 dark:text-white lg:gap-8 p-6 lg:p-8 border-b border-gray-200 dark:border-gray-700"
+                        >
+                            No articles found.
+                        </div>
                     </div>
                 </div>
             </div>

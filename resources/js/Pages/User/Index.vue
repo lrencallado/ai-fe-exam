@@ -66,7 +66,7 @@ const createUser = () => {
                                         <div class="flex items-center">
                                             <img
                                                 class="h-8 w-8 rounded-full object-cover mr-2"
-                                                :src="user.profile_photo_path"
+                                                :src="user.profile_photo_url"
                                                 :alt="
                                                     user.name
                                                 "
@@ -85,7 +85,7 @@ const createUser = () => {
                                         </span>
                                     </td>
                                 </tr>
-                                <tr v-if="Object.keys(users).length == 0">
+                                <tr v-if="users.data.length == 0">
                                     <td colspan="3" class="px-6 py-4">No data.</td>
                                 </tr>
                             </tbody>
