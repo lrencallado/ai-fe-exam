@@ -74,7 +74,7 @@ class ArticleController extends Controller
                 'article' => $article,
                 'tinymce_api_key' => config('services.tinymce.api_key'),
                 'companies' => Company::where('status', Status::ACTIVE)->get(),
-                'editors' => $user->editors(),
+                'editors' => $user->editors()->where('status', Status::ACTIVE->value),
             ]);
         }
 
