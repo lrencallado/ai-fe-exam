@@ -3,9 +3,9 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import { router } from '@inertiajs/vue3'
 
 const props = defineProps({
-    articles: Array,
+    articles: Object,
 });
-console.log(props.articles);
+
 const createArticle = () => {
     router.post(route('articles.store'));
 }
@@ -80,7 +80,12 @@ const createArticle = () => {
                                             >
                                         </h2>
                                     </div>
-                                    <span class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20 dark:bg-gray-900/20 dark:text-yellow-600 dark:ring-yellow-600">{{ article.status }}</span>
+                                    <span v-if="$page.props.status.FOR_EDIT == article.status" class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20 dark:bg-gray-900/20 dark:text-yellow-600 dark:ring-yellow-600">
+                                        {{ article.status }}
+                                    </span>
+                                    <span v-if="$page.props.status.PUBLISHED == article.status" class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 dark:bg-gray-900/20 dark:ring-green-600">
+                                        {{ article.status }}
+                                    </span>
                                 </div>
                                 <div class="text-xs text-gray-900 dark:text-white flex items-center">
                                     Writer:

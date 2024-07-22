@@ -34,6 +34,7 @@ Route::middleware([
 
     Route::controller(UserController::class)->prefix('users')->group(function () {
         Route::get('/', 'index')->name('users.index');
+        Route::get('/create', 'create')->name('users.create');
         Route::get('/{user}/edit', 'edit')->name('users.edit');
         Route::post('/store', 'store')->name('users.store');
         Route::put('/{user}/update', 'update')->name('users.update');
@@ -41,6 +42,7 @@ Route::middleware([
 
     Route::controller(CompanyController::class)->prefix('companies')->group(function () {
         Route::get('/', 'index')->name('companies.index');
+        Route::get('/create', 'create')->name('companies.create');
         Route::get('/{company}/edit', 'edit')->name('companies.edit');
         Route::post('/store', 'store')->name('companies.store');
         Route::put('/{company}/update', 'update')->name('companies.update');

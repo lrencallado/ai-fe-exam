@@ -25,7 +25,7 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         return Inertia::render('Article/Index', [
-            'articles' => Article::all()
+            'articles' => Article::paginate(6)
         ]);
     }
 
@@ -73,7 +73,7 @@ class ArticleController extends Controller
             return Inertia::render('Article/Edit', [
                 'article' => $article,
                 'tinymce_api_key' => config('services.tinymce.api_key'),
-                'companies' => Company::all(),
+                'companies' => Company::where('status', Status::ACTIVE)->get(),
                 'editors' => $user->editors(),
             ]);
         }
