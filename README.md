@@ -18,9 +18,9 @@ To set up for the first time on a local environment:
 #### Writer
 Email: writer@example.com
 
-Password: Admin!2345
+Password: password
 
 #### Editor
 Email: editor@example.com
 
-Password: Admin!2345
+Password: password
